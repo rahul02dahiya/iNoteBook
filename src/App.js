@@ -8,19 +8,25 @@ import {
 import Home from './comonents/Home';
 import About from './comonents/About';
 import ContactUs from './comonents/ContactUs';
+import NoteState from './context/notes/NoteState';
 
 const App = () => {
   return (
     <>
-    <Router>
-      <Navbar />
-      <Routes>
-        <Route exact path='/' element={<Home/>}/>
-        <Route exact path='/about' element={<About/>}/>
-        <Route exact path='/contactus' element={<ContactUs/>}/>
+    <NoteState>
+      <Router>
 
-      </Routes>
-    </Router>
+        <Navbar />
+        <Routes>
+
+          <Route exact path='/' element={<Home />} />
+          <Route exact path='/about' element={<About />} />
+          <Route exact path='/contactus' element={<ContactUs />} />
+
+        </Routes>
+
+      </Router>
+    </NoteState>
     </>
   )
 }
