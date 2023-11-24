@@ -1,19 +1,28 @@
-import React from "react";
-import Navbar  from "./comonents/Navbar";
+import React from 'react';
+import Navbar from './comonents/Navbar';
 import {
   BrowserRouter as Router,
   Routes,
-  Route,
-  Link
-} from "react-router-dom";
+  Route
+} from 'react-router-dom';
+import Home from './comonents/Home';
+import About from './comonents/About';
+import ContactUs from './comonents/ContactUs';
 
-function App() {
+const App = () => {
   return (
     <>
-    <Navbar/>
-      <h1>This is iNoteB0ok Beta-1 </h1>
+    <Router>
+      <Navbar />
+      <Routes>
+        <Route exact path='/' element={<Home/>}/>
+        <Route exact path='/about' element={<About/>}/>
+        <Route exact path='/contactus' element={<ContactUs/>}/>
+
+      </Routes>
+    </Router>
     </>
-  );
+  )
 }
 
-export default App;
+export default App
