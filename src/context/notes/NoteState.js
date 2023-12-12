@@ -12,16 +12,21 @@ const NoteState = (props) => {
 
 
   const getNotes = async () => {
-    const response = await fetch(`${host}/api/notes/fetchallnotes`, {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-        "auth-token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjU1N2IwMDMyZDVhMmViNjNjNjgxZjY4In0sImlhdCI6MTcwMDI4ODc5Mn0.xFT49lrJNaZ1fTu0A9WE2v9Gs_LoVyMOa2bJlF80gsw"
-      }
-    });
-    const json = await response.json();
-    console.log(json);
-    setNotes(json);
+    try {
+      const response = await fetch(`${host}/api/notes/fetchallnotes`, {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          "auth-token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjU1N2IwMDMyZDVhMmViNjNjNjgxZjY4In0sImlhdCI6MTcwMDI4ODc5Mn0.xFT49lrJNaZ1fTu0A9WE2v9Gs_LoVyMOa2bJlF80gsw"
+        }
+      })
+      const dNotes = await response.json();
+      console.log(dNotes);
+      setNotes(dNotes);
+    } catch (error) {
+      console.error('There was a problem with the fetch operation:', error);
+
+    }
   }
 
 
@@ -36,19 +41,8 @@ const NoteState = (props) => {
       },
       body: JSON.stringify({ title, description, tag }),
     });
-    const json = response.json();
-    console.log(json);
-
     // frontend
-    const note = {
-      "_id": "6568b5816he8f6f5a6ef114065",
-      "user": "6557b0032d5a2eb63c681f68",
-      "title": title,
-      "description": description,
-      "tag": tag,
-      "date": "2023-11-30T16:28:06.563Z",
-      "__v": 0
-    };
+    const note = await response.json();
     setNotes(notes.concat(note));
   }
   // Delete note
@@ -61,35 +55,44 @@ const NoteState = (props) => {
         "auth-token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjU1N2IwMDMyZDVhMmViNjNjNjgxZjY4In0sImlhdCI6MTcwMDI4ODc5Mn0.xFT49lrJNaZ1fTu0A9WE2v9Gs_LoVyMOa2bJlF80gsw"
       }
     });
-    const json = response.json();
-    console.log(json);
+    // const json = response.json();
+    // console.log(json);
 
-    console.log(`note deleted ${id}`);
+    // console.log(`note deleted ${id}`);
     const newNotes = notes.filter((note) => { return note._id !== id })
     setNotes(newNotes);
   }
   // Edit note
+  let newNotes = JSON.parse(JSON.stringify(notes));
   const editNote = async (id, title, description, tag) => {
     for (let i = 0; i < notes.length; i++) {
-      const element = notes[i];
-      if (element._id === id) {
-        element.title = title;
-        element.description = description;
-        element.tag = tag;
+      if (newNotes[i]._id === id) {
+        newNotes[i].title = title;
+        newNotes[i].description = description;
+        newNotes[i].tag = tag;
+        console.log(newNotes[i]);
+        break;
       }
     }
+    setNotes(newNotes);
 
     // API calls
 
-    const response = await fetch(`${host}/api/notes/updatenotes/${id}`, {
+    await fetch(`${host}/api/notes/updatenotes/${id}`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
         "auth-token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjU1N2IwMDMyZDVhMmViNjNjNjgxZjY4In0sImlhdCI6MTcwMDI4ODc5Mn0.xFT49lrJNaZ1fTu0A9WE2v9Gs_LoVyMOa2bJlF80gsw"
       },
       body: JSON.stringify({ id, title, description, tag }),
-    });
-    const json = response.json();
+    }).then(response => {
+      if (!response.ok) {
+        throw new Error('Network response was not ok');
+      }
+    })
+    .catch(error => {
+      console.error('There was a problem with the fetch operation:', error);
+    })
   }
 
   return (
