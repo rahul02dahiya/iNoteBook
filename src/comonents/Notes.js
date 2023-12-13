@@ -71,7 +71,7 @@ const Notes = () => {
                 </div>
             </div>
             <h2>Your notes</h2>
-            <div className='row m-3 '>
+            <div className='container row m-2'>
                 {notes.length===0 && <div className="container"><img src={logo} style={{"width":"100px"}} alt="loading..." /> <h6>Waiting... <p>for your Notes</p></h6> </div>}
                 {notes.map(
                     (note) => {

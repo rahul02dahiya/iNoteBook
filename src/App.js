@@ -10,6 +10,8 @@ import Home from './comonents/Home';
 import About from './comonents/About';
 import ContactUs from './comonents/ContactUs';
 import NoteState from './context/notes/NoteState';
+import Login from './comonents/Login';
+import Signup from './comonents/Signup';
 
 const App = () => {
   return (
@@ -23,6 +25,8 @@ const App = () => {
           <Route exact path='/' element={<Home />} />
           <Route exact path='/about' element={<About />} />
           <Route exact path='/contactus' element={<ContactUs />} />
+          <Route exact path='/login' element={<Login />} />
+          <Route exact path='/signup' element={<Signup />} />
 
         </Routes>
 

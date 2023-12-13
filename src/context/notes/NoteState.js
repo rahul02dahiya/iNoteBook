@@ -21,7 +21,7 @@ const NoteState = (props) => {
         }
       })
       const dNotes = await response.json();
-      console.log(dNotes);
+      // console.log(dNotes);
       setNotes(dNotes);
     } catch (error) {
       console.error('There was a problem with the fetch operation:', error);
@@ -70,7 +70,7 @@ const NoteState = (props) => {
         newNotes[i].title = title;
         newNotes[i].description = description;
         newNotes[i].tag = tag;
-        console.log(newNotes[i]);
+        // console.log(newNotes[i]);
         break;
       }
     }
