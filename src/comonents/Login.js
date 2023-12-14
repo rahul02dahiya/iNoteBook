@@ -1,15 +1,19 @@
 import React from 'react';
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 const host = "http://127.0.0.1:5000";
 
 const Login = () => {
     
    const [credentials, setCredentials] = useState({email:"",password:""});
-   
+   let navigate = useNavigate();
    
     const handleSubmit = async (e)=>{
+
+        // To stop reload \/
         e.preventDefault();
+
         const response = await fetch(`${host}/api/auth/login`,{
             method: "POST",
         headers: {
@@ -17,8 +21,18 @@ const Login = () => {
         },
         body: JSON.stringify({email:credentials.email, password:credentials.password})
         });
+
         const json = await response.json();
-        console.log(json);
+        console.log(json.success);
+
+        if(json.success){
+            // Save auth token and redirect to notes page
+            localStorage.setItem("token",json.authtoken);
+            navigate("/");
+        }
+        else{
+            alert("Invelit credentials");
+        }
     }
 
     const onChange = (e) => {
@@ -28,8 +42,8 @@ const Login = () => {
 
     return (
         <>
-            <div className='d-flex justify-content-center ' style={{ "marginTop": "6rem" }}>
-                <h2 className='m-auto '>   Welcome back <br /> &nbsp; in iNoteBo0k</h2>
+            <div className='d-flex justify-content-center'>
+                <h2 className='m-auto '>   Welcome back <hr /> &nbsp; in iNoteBo0k</h2>
                 <form className='border rounded border-dark p-5 me-auto'  onSubmit={handleSubmit}  style={{ "width": "24rem" }}>
                     <div className="mb-3">
                         <label htmlFor="email" className="form-label">Email address</label>
