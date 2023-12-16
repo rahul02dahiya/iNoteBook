@@ -1,17 +1,17 @@
 import React from 'react';
-import Navbar from './comonents/Navbar';
+import Navbar from './components/Navbar';
 import './App.css';
 import {
   BrowserRouter as Router,
   Routes,
   Route
 } from 'react-router-dom';
-import Home from './comonents/Home';
-import About from './comonents/About';
-import ContactUs from './comonents/ContactUs';
+import Home from './components/Home';
+import About from './components/About';
+import ContactUs from './components/ContactUs';
 import NoteState from './context/notes/NoteState';
-import Login from './comonents/Login';
-import Signup from './comonents/Signup';
+import Login from './components/Login';
+import Signup from './components/Signup';
 
 const App = () => {
   return (

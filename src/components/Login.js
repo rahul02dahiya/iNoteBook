@@ -42,7 +42,7 @@ const Login = () => {
 
     return (
         <>
-            <div className='d-flex justify-content-center'>
+            <div className='d-flex justify-content-center' style={{"margin":"10%"}}>
                 <h2 className='m-auto '>   Welcome back <hr /> &nbsp; in iNoteBo0k</h2>
                 <form className='border rounded border-dark p-5 me-auto'  onSubmit={handleSubmit}  style={{ "width": "24rem" }}>
                     <div className="mb-3">
