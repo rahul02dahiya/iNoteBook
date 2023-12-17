@@ -7,7 +7,7 @@ const host = "http://127.0.0.1:5000";
 const Login = () => {
     
    const [credentials, setCredentials] = useState({email:"",password:""});
-   let navigate = useNavigate();
+   const navigate = useNavigate();
    
     const handleSubmit = async (e)=>{
 
@@ -27,11 +27,13 @@ const Login = () => {
 
         if(json.success){
             // Save auth token and redirect to notes page
-            localStorage.setItem("token",json.authtoken);
+            localStorage.setItem("token",json.authToken);
+            console.log(localStorage.getItem("token"));
+            console.log(json)
             navigate("/");
         }
         else{
-            alert("Invelit credentials");
+            alert("Invelid credentials");
         }
     }
 

@@ -15,6 +15,7 @@ import Signup from './components/Signup';
 
 const App = () => {
   return (
+    
     <>
     <NoteState>
       <Router>

@@ -26,7 +26,7 @@ const Signup = () => {
        console.log(json.success);
        if(json.success){
         // Save auth token and redirect to notes page
-        localStorage.setItem("token",json.authtoken);
+        localStorage.setItem("token",json.authToken);
         navigate("/");
     }
     else{
@@ -44,7 +44,7 @@ const Signup = () => {
             <h2 className='m-auto '>Hola!  <hr /> Organize your notes  <hr /> &nbsp; with iNoteBo0k.</h2>
             <form className='border rounded border-dark p-5 me-auto' onSubmit={handleSubmit} style={{ "width": "24rem" }}>
                 <div className="mb-3">
-                    <label htmlFor="name" className="form-label">Email address</label>
+                    <label htmlFor="name" className="form-label">User name</label>
                     <input type="text" className="form-control" id="name" name="name"  aria-describedby="emailHelp"  value={credentials.name} onChange={onChange} required minLength={3} />
                 </div>
                 <div className="mb-3">
