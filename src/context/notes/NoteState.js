@@ -17,11 +17,11 @@ const NoteState = (props) => {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
-          "auth-token": localStorage.getItem('token')
+          "auth-token": localStorage.getItem('inotetoken')
         }
       })
       const dNotes = await response.json();
-      // console.log(dNotes);
+      console.log(dNotes);
       setNotes(dNotes);
     } catch (error) {
       console.error('There was a problem with the fetch operation:', error);
@@ -37,7 +37,7 @@ const NoteState = (props) => {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        "auth-token": localStorage.getItem('token')
+        "auth-token": localStorage.getItem('inotetoken')
       },
       body: JSON.stringify({ title, description, tag }),
     });
@@ -52,7 +52,7 @@ const NoteState = (props) => {
       method: "DELETE",
       headers: {
         "Content-Type": "application/json",
-        "auth-token": localStorage.getItem('token')
+        "auth-token": localStorage.getItem('inotetoken')
       }
     });
     // const json = response.json();
@@ -82,7 +82,7 @@ const NoteState = (props) => {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
-        "auth-token": localStorage.getItem('token')
+        "auth-token": localStorage.getItem('inotetoken')
       },
       body: JSON.stringify({ id, title, description, tag }),
     }).then(response => {

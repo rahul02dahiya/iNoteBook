@@ -12,7 +12,7 @@ const Navbar = () => {
     }, [location]);
 
     const handleLogout = ()=>{
-        localStorage.removeItem('token');
+        localStorage.removeItem('inotetoken');
         navigate('/login')
     }
     return (
@@ -35,7 +35,7 @@ const Navbar = () => {
                         </li>
                     </ul>
                     {
-                        localStorage.getItem('token') ? <button className="btn btn-primary" onClick={handleLogout}>LogOut</button>
+                        localStorage.getItem('inotetoken') ? <button className="btn btn-primary" onClick={handleLogout}>LogOut</button>
                         : <div className="d-flex">
                         <Link className='btn btn-primary mx-2' to="/login" role='button'>Login</Link>
                         <Link className='btn btn-primary mx-2' to="/signup" role='button'>Signup</Link>

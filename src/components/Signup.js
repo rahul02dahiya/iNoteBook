@@ -26,7 +26,7 @@ const Signup = () => {
        console.log(json.success);
        if(json.success){
         // Save auth token and redirect to notes page
-        localStorage.setItem("token",json.authToken);
+        localStorage.setItem("inotetoken",json.authToken);
         navigate("/");
     }
     else{

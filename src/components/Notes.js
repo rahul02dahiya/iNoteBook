@@ -11,7 +11,7 @@ const Notes = () => {
     const [note, setNote] = useState({ id: "", etitle: "", edescription: "", etag: "" })
     const { notes, getNotes, editNote } = context;
     useEffect(() => {
-        if(localStorage.getItem('token')){
+        if(localStorage.getItem('inotetoken')){
             getNotes();
         }
         else{
